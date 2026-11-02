@@ -2,7 +2,7 @@
 
 Read this when building a Mindera deck or slide, in HTML or in any tool that exports to PowerPoint or Google Slides. It records the Mindera slide template (cover, content and section-divider layouts) and the slide guidelines (text hierarchy, strokes and colours), measured from the template file itself.
 
-`assets/mindera-slides.css` implements all of it as classes, and `examples/slide-template.html` shows one slide of each layout:
+These rules are for slide decks only. Web pages and apps follow the general brandbook tokens and fonts in `mindera-theme.css`, which this page doesn't change. `assets/mindera-slides.css` implements the slide rules as classes and applies its font and colour overrides only inside `.mt-slide`, so loading it on a page that also has web UI leaves that UI untouched. `examples/slide-template.html` shows one slide of each layout:
 
 ![Cover](../screenshots/slide-template-cover.png)
 ![Content slide](../screenshots/slide-template-content.png)
@@ -19,7 +19,7 @@ Don't build at 1280 × 720 or at 10 × 5.625 in (Google Slides' older default). 
 
 ## Typeface
 
-**Montserrat only**, for everything, at these weights: Light (300), Regular (400), Medium (500), SemiBold (600) and Bold (700). The template's own master uses Montserrat, Montserrat Medium and Montserrat Light. The skill no longer ships PP Neue Machina: it isn't in the slide template, and a non-Google font falls back to Arial when a deck reaches Google Slides.
+Slides use **Montserrat only**, for everything, at these weights: Light (300), Regular (400), Medium (500), SemiBold (600) and Bold (700). The template's own master uses Montserrat, Montserrat Medium and Montserrat Light. PP Neue Machina, the brandbook's web headline face, isn't in the slide template, and a non-Google font falls back to Arial when a deck reaches Google Slides. So inside `.mt-slide`, `mindera-slides.css` points `--mt-font-head` at Montserrat. Web pages keep PP Neue Machina headlines.
 
 ## Colours and strokes (slide guidelines)
 
@@ -30,6 +30,8 @@ Don't build at 1280 × 720 or at 10 × 5.625 in (Google Slides' older default). 
 | `#FFFFFF` | All text on dark backgrounds. Also a 1px line. |
 | `#595959` | 1px lines: table rules, dividers, outlines (`--mt-border`). |
 | `#FFE68E` | Slide titles and section numbers, from the template theme's `accent2` (`--mt-title`). |
+
+On Mindera Dark, `mindera-slides.css` sets these values on the tokens inside `.mt-slide` only: `--mt-text` `#FFFFFF`, `--mt-surface` `#2A2A2A`, `--mt-surface2` `#373736`, `--mt-border` `#595959` and `--mt-title` `#FFE68E`. `--mt-muted` `#D9D9D9` and `--mt-muted2` `#A6A6A6` are for incidental chrome only. All of them clear 4.5:1 on `#2A2A2A`. On other themes, slides keep that theme's tokens, and `--mt-title` falls back to `--mt-accent-ink`.
 
 These rules follow from the table:
 

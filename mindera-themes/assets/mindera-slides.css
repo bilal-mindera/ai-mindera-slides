@@ -6,9 +6,33 @@
  * slide: 1px = 6350 EMU and 1pt = 2px. Every position below is the template's own placeholder
  * position, so a slide built here lines up with the PPTX / Google Slides master when exported.
  * See references/slides.md.
+ *
+ * Scope: everything here applies inside .mt-slide only. Web pages and apps keep the general
+ * tokens and fonts from mindera-theme.css; slides follow the slide guidelines, which differ.
  */
 
-:root {
+/* ---------- Slide-only brand settings (slide guidelines) ---------- */
+
+/* Slides use Montserrat only; headings at Medium (500). */
+.mt-slide {
+  --mt-font-head: 'Montserrat', system-ui, sans-serif;
+  --mt-font-body: 'Montserrat', system-ui, sans-serif;
+  /* Slide and section titles: accent ink by default, the template's pale yellow on Mindera Dark. */
+  --mt-title: var(--mt-accent-ink);
+}
+/* Mindera Dark slides: white for all text, #2a2a2a text boxes, 1px #595959 lines. */
+[data-mindera-theme="mindera-dark"] .mt-slide,
+:root:not([data-mindera-theme]) .mt-slide {
+  --mt-surface: #2a2a2a;
+  --mt-surface2: #373736;
+  --mt-border: #595959;
+  --mt-text: #ffffff;
+  --mt-muted: #d9d9d9;
+  --mt-muted2: #a6a6a6;
+  --mt-title: #ffe68e;
+}
+
+.mt-slide {
   /* Type scale. Template placeholders, then the guideline's text hierarchy (pt × 2). */
   --mt-fs-cover-title: 74px;    /* 37pt  cover title, Medium, title case */
   --mt-fs-divider-title: 66px;  /* 33pt  section divider title and number */

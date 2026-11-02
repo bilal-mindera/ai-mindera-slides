@@ -7,7 +7,7 @@ mindera-theme.css   mindera-theme.js   fonts/   index.html   shortcuts.js   pres
 <deck>/index.html   <deck>/theme.css (the deck's adapter)   …
 ```
 
-The root `fonts/` folder is the library's `fonts/`, so `mindera-theme.css` resolves its fonts without a copy. Keep the root files identical to the skill's `assets/`. After changing either, copy them across. `fonts/` now holds only Montserrat: the skill dropped PP Neue Machina to follow the slide template, so delete the old `PPNeueMachina-Regular.otf` when you sync. New decks that should match the Mindera slide template also vendor `mindera-slides.css` and `slides/` (see `slides.md`).
+The root `fonts/` folder is the library's `fonts/`, so `mindera-theme.css` resolves its fonts without a copy. Keep the root files identical to the skill's `assets/`. After changing either, copy them across. Decks that should match the Mindera slide template also vendor `mindera-slides.css` and `slides/` (see `slides.md`).
 
 ## Adding the themes to a deck
 

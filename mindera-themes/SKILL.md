@@ -1,6 +1,6 @@
 ---
 name: mindera-themes
-description: Apply Mindera's brand theme to any HTML/CSS/JS page or web app (static pages, slide decks, dashboards, Vite/React/Vue/Next apps, Tailwind or Bootstrap projects). It is a drop-in library with eight brandbook themes (Mindera Dark/Light, Fashion Tech, Fintech, Gaming, Public Sector, Retail Tech, Travel), the brand font (Montserrat) and glows, status and chart colours, a theme picker that remembers the choice, and the Mindera slide template's 16:9 layouts (cover, content, section divider) with the brand text hierarchy, ready for PPTX and Google Slides. Use it whenever someone wants something Mindera-branded, including any Mindera deck or slide or "on-brand", in Mindera colours or industry colours, or wants a theme switcher, dark/light mode or brandbook styling on a Mindera page, app, deck or internal tool, even if they don't mention themes. Also use it to add, change or fix a Mindera theme or palette.
+description: Apply Mindera's brand theme to any HTML/CSS/JS page or web app (static pages, slide decks, dashboards, Vite/React/Vue/Next apps, Tailwind or Bootstrap projects). It is a drop-in library with eight brandbook themes (Mindera Dark/Light, Fashion Tech, Fintech, Gaming, Public Sector, Retail Tech, Travel), brand fonts and glows, status and chart colours, and a theme picker that remembers the choice. Use it whenever someone wants something Mindera-branded or "on-brand", in Mindera colours or industry colours, or wants a theme switcher, dark/light mode or brandbook styling on a Mindera page, app, deck or internal tool, even if they don't mention themes. Also use it to add, change or fix a Mindera theme or palette. For slide decks it adds the Mindera slide template (16:9 cover, content and divider layouts, the slide text hierarchy, Montserrat-only type) ready for PPTX and Google Slides; use that for any Mindera deck or slide.
 ---
 
 # Mindera themes
@@ -8,7 +8,6 @@ description: Apply Mindera's brand theme to any HTML/CSS/JS page or web app (sta
 A small library that gives any web page the Mindera brandbook themes:
 
 - **`mindera-theme.css`**: colour tokens for eight themes, the brand fonts, glow helpers and the picker's styles.
-- **`mindera-slides.css`** (optional): the Mindera slide template's 16:9 layouts, text hierarchy, text boxes, lines and tables, for decks and slides.
 - **`mindera-theme.js`**: a classic script for `<head>`. It applies the saved theme before the first paint, builds the theme picker, and exposes a small API.
 
 The page's own CSS uses the `--mt-*` tokens, either directly or through an adapter that maps the page's existing variables onto them. Switching theme only changes the tokens, so no other CSS has to know which theme is active.
@@ -30,15 +29,15 @@ More in `screenshots/`: the title and tokens slides in every theme, and a slide 
 |---|---|
 | `assets/mindera-theme.css` | Tokens, fonts, `.mt-glow` / `.mt-glow-fixed`, picker styles. Copy it. |
 | `assets/mindera-theme.js` | Pre-paint, picker and API. Copy it. |
-| `assets/fonts/` | Montserrat (variable, all weights), the only brand typeface. Copy it next to the CSS (the CSS loads `fonts/…` relative to itself). |
-| `assets/mindera-slides.css` | Slide template layouts (cover, content, divider), type scale, text boxes, 1px lines, tables, bar charts. Optional; for decks. |
-| `assets/slides/` | Template backgrounds (cover, content, divider) and the white Mindera logos. Copy it next to `mindera-slides.css`. |
-| `examples/slide-template.html` | One slide of each layout, built with the classes. |
+| `assets/fonts/` | PP Neue Machina + Montserrat. Copy it next to the CSS (the CSS loads `fonts/…` relative to itself). |
 | `assets/mindera-base.css` | Optional element defaults (body, headings, links, buttons, inputs, tables). Only for pages with no styles of their own. |
 | `scripts/check_themes.js` | Renders a page in every theme, checks contrast, saves screenshots. |
 | `references/integrations.md` | Adapting existing CSS, bundled apps, Next.js, React, Tailwind, Bootstrap, charts/canvas, iframes, PDF export. |
 | `references/palettes.md` | Brandbook swatches, how each token was derived, adding a palette. |
-| `references/slides.md` | The slide template and guidelines: 16:9 canvas, text hierarchy, colours and strokes, layout positions, PPTX/Google Slides compatibility. Read it for any deck or slide. |
+| `assets/mindera-slides.css` | Slide decks only: the slide template's 16:9 layouts, type scale, text boxes, lines and tables, plus the slide guidelines' font and colour overrides, scoped to `.mt-slide`. |
+| `assets/slides/` | Slide template backgrounds (cover, content, divider) and white Mindera logos. Copy it next to `mindera-slides.css`. |
+| `examples/slide-template.html` | One slide of each layout. |
+| `references/slides.md` | Slide template and guidelines: canvas, text hierarchy, colours and strokes, layout positions, PPTX/Google Slides compatibility. Read it for any deck or slide. |
 | `references/presentations-repo.md` | How the Presentations repo (decks + index) uses it. Read it when working there. |
 | `screenshots/` | Example pages in each theme, used in "What it looks like". |
 
@@ -56,14 +55,11 @@ Every theme sets all of these on `<html data-mindera-theme="…">`:
 | `--mt-danger`, `--mt-success`, `--mt-warning`, `--mt-info` | status text and icons (4.5:1 on `--mt-surface`) |
 | `--mt-glow-a`, `--mt-glow-b` | the brand glows |
 | `--mt-chart-1` … `--mt-chart-6` | series colours for charts and categories |
-| `--mt-title` | slide and section titles (`#FFE68E` on Mindera Dark, `--mt-accent-ink` elsewhere) |
-| `--mt-font-head`, `--mt-font-body` | Montserrat for both: headings at Medium (500), body at Regular (400) |
+| `--mt-font-head`, `--mt-font-body` | PP Neue Machina, Montserrat |
 
 Use `--mt-accent` for anything filled and `--mt-accent-ink` for anything people read. On the light themes the brand accent (yellow, teal) is too pale for text, so `accent-ink` is a darker shade there. Keeping this one rule is what makes all eight themes legible.
 
 Everything is namespaced: `--mt-*` variables, `.mt-*` classes and the `data-mindera-theme` attribute. That's deliberate, so the library can't collide with an app's own `--bg`, `.theme-toggle` or another library's `data-theme` (e.g. DaisyUI).
-
-On Mindera Dark the tokens follow the slide guidelines: all text white (`--mt-text`), text boxes `#2A2A2A` (`--mt-surface`), 1px lines `#595959` (`--mt-border`), `#FFC700` to highlight. Use `--mt-text` for body copy, and keep `--mt-muted` / `--mt-muted2` for UI chrome and incidental labels.
 
 ## Adding it to a page or app
 
@@ -92,9 +88,17 @@ On Mindera Dark the tokens follow the slide guidelines: all text white (`--mt-te
 
 5. **Add the glows.** Use `.mt-glow-fixed` on `<body>` for scrolling pages, and `.mt-glow` on full-screen elements like slides or hero sections.
 
-6. **Decks and slides.** Also load `mindera-slides.css` (with `slides/` next to it) and build each slide as a 1920 × 1080 `.mt-slide` using the layout classes. `references/slides.md` has the rules: Montserrat only, 1px lines, highlight with an outline rather than a yellow fill, real text instead of SVG labels, and the template positions that keep PPTX and Google Slides exports aligned.
+6. **Redraw JS-drawn colours on change.** Canvas or chart libraries won't follow CSS variables. Read `MinderaTheme.token('chart-1')`, and redraw inside `MinderaTheme.onChange(...)`.
 
-7. **Redraw JS-drawn colours on change.** Canvas or chart libraries won't follow CSS variables. Read `MinderaTheme.token('chart-1')`, and redraw inside `MinderaTheme.onChange(...)`.
+## Slide decks
+
+Slides follow their own guidelines, which differ from web and app styling. They use Montserrat only, white text on `#2A2A2A` boxes, 1px lines and a pale-yellow title on Mindera Dark, and they use fixed 16:9 template positions. Keep those rules to slides:
+
+1. Load `mindera-slides.css` after `mindera-theme.css`, and vendor `slides/` next to it.
+2. Build each slide as a 1920 × 1080 `<section class="mt-slide">` using the layout classes (`--cover`, `--divider`, `__title`, `__headline`, `__body`, footer classes).
+3. Follow `references/slides.md`.
+
+The stylesheet sets its font and colour overrides only inside `.mt-slide`, so the rest of the page keeps the general tokens above.
 
 ## JavaScript API
 

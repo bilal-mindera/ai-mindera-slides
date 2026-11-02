@@ -2,7 +2,7 @@
 
 Source: `Mindera Brandbook 2025.pdf` (a copy sits in the root of the Presentations repo). Colour overview on p.32, Mindera palette on p.33 (labelled "Minder Palette" in the book), one page per industry on pp.43–53. Each industry page gives a **light mode** and a **dark mode** set of three swatches, plus a sample "glow" gradient.
 
-Typography: the brandbook (p.27) pairs PP Neue Machina headlines with Montserrat body, but the Mindera slide template and slide guidelines use **Montserrat only** (Light, Regular, Medium, SemiBold, Bold). The skill follows the template, so it ships only Montserrat in `assets/fonts/`, and both font tokens point at it.
+Typography (p.27): **PP Neue Machina** for headlines, **Montserrat** for body. Both ship in the skill's `assets/fonts/`.
 
 ## Brandbook swatches
 
@@ -29,7 +29,7 @@ Typography: the brandbook (p.27) pairs PP Neue Machina headlines with Montserrat
 | `retail-tech` | dark | `#232326` | `#EA9D74` | `#EA9D74` | `#E6773C` / `#F4CDB8` |
 | `travel` | dark | `#1A084D` | `#47F7FF` | `#47F7FF` | `#00A6AD` / `#47F7FF` |
 
-The other tokens are derived rather than taken from the book (except on Mindera Dark, which uses the slide guidelines; see below):
+The other tokens are derived rather than taken from the book:
 
 - `--mt-surface` / `--mt-surface2` / `--mt-border`: steps from `--mt-bg` towards `--mt-text`, roughly +6%, +12% and +18% lightness on dark themes. Light themes use white cards on a tinted background.
 - `--mt-text`: a near-white tinted towards the theme's hue on dark themes, `#0A0A0B` on light ones.
@@ -37,10 +37,6 @@ The other tokens are derived rather than taken from the book (except on Mindera 
 - `--mt-danger`: one red per theme, lightened on saturated dark backgrounds until it clears 4.5:1 on `--mt-surface`.
 - `--mt-success` / `--mt-warning` / `--mt-info`: not in the brandbook. A green, amber and blue per theme: bright on dark themes, dark on light ones, each at 4.5:1 or more on `--mt-surface`.
 - Glow alpha: about `24`–`66` hex alpha on dark themes and higher (`59`–`cc`) on light ones, so the glow reads without washing out the text.
-
-## Mindera Dark and the slide guidelines
-
-Mindera Dark takes its neutrals from the Mindera slide guidelines rather than deriving them: `--mt-text` `#FFFFFF` ("all text on dark backgrounds"), `--mt-surface` `#2A2A2A` ("text box backgrounds"), `--mt-border` `#595959` (1px lines), and `--mt-surface2` `#373736` (the template's table rules). `--mt-title` is `#FFE68E`, the template theme's `accent2`, used for slide titles. `--mt-muted` `#D9D9D9` and `--mt-muted2` `#A6A6A6` are for UI chrome only; body copy stays white. All of them clear 4.5:1 on `#2A2A2A`. See `slides.md`.
 
 ## Where the brandbook needed bending
 
