@@ -1,0 +1,159 @@
+/*
+ * Mindera slides: the 16:9 layouts of the Mindera slide template (cover, content, section divider)
+ * plus the guideline's text boxes, lines and tables. Load it after mindera-theme.css.
+ *
+ * Geometry is for a 1920×1080 canvas, the same shape as the template's 13.333 × 7.5 in widescreen
+ * slide: 1px = 6350 EMU and 1pt = 2px. Every position below is the template's own placeholder
+ * position, so a slide built here lines up with the PPTX / Google Slides master when exported.
+ * See references/slides.md.
+ */
+
+:root {
+  /* Type scale. Template placeholders, then the guideline's text hierarchy (pt × 2). */
+  --mt-fs-cover-title: 74px;    /* 37pt  cover title, Medium, title case */
+  --mt-fs-divider-title: 66px;  /* 33pt  section divider title and number */
+  --mt-fs-title: 48px;          /* 24pt  slide title, Medium, uppercase, --mt-title */
+  --mt-fs-subtitle-cover: 40px; /* 20pt  cover subtitle, Light */
+  --mt-fs-headline: 38px;       /* 19pt  slide headline (template body placeholder) */
+  --mt-fs-highlight: 34px;      /* 17pt  guideline "Highlighted Text" / "Separator Title" */
+  --mt-fs-subtitle: 22px;       /* 11pt  guideline "Subtitle" */
+  --mt-fs-body-1: 24px;         /* 12pt  guideline "Body Text 01": tables, box titles */
+  --mt-fs-body-2: 20px;         /* 10pt  guideline "Body Text 02": text inside boxes */
+  --mt-fs-footer: 18px;         /*  9pt  Confidential, © and page number */
+  --mt-fs-caption: 16px;        /*  8pt  guideline "Captions" */
+  --mt-fs-note: 14px;           /*  7pt  guideline "Small Notes": source lines */
+}
+
+/* ---------- The slide ---------- */
+
+.mt-slide {
+  position: relative;
+  box-sizing: border-box;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  color: var(--mt-text);
+  font-family: var(--mt-font-body);
+  line-height: 1.15;
+  background: var(--mt-bg) url('slides/content-bg.jpg') center / cover no-repeat;
+}
+.mt-slide--cover { background-image: url('slides/cover-bg.jpg'); }
+.mt-slide--divider { background-image: url('slides/divider-bg.jpg'); }
+.mt-slide * { margin: 0; }
+
+/* The template backgrounds are Mindera Dark artwork. Other themes get their glows instead. */
+[data-mindera-theme]:not([data-mindera-theme="mindera-dark"]) .mt-slide {
+  background:
+    radial-gradient(1100px 600px at 92% 0%, var(--mt-glow-a), transparent 70%),
+    radial-gradient(1000px 560px at 0% 100%, var(--mt-glow-b), transparent 70%),
+    var(--mt-bg);
+}
+/* The logo files are white; flip them on the light themes. */
+[data-mindera-theme="mindera-light"] .mt-slide__logo,
+[data-mindera-theme="fintech"] .mt-slide__logo { filter: invert(1); }
+
+/* ---------- Template placeholders ---------- */
+
+.mt-slide__logo {
+  position: absolute; left: 62px; top: 40px; width: 165px; height: 43px; object-fit: contain;
+}
+.mt-slide__title {
+  position: absolute; left: 127px; top: 177px; width: 1717px;
+  font: 500 var(--mt-fs-title) / 1.25 var(--mt-font-head);
+  text-transform: uppercase;
+  color: var(--mt-title);
+}
+.mt-slide__headline {
+  position: absolute; left: 127px; top: 293px; width: 1717px;
+  font: 400 var(--mt-fs-headline) / 1.15 var(--mt-font-body);
+  color: var(--mt-text);
+}
+/* Content area: below a headline of up to two lines, above the footer row. */
+.mt-slide__body {
+  position: absolute; left: 127px; top: 440px; width: 1717px; height: 530px;
+  display: flex; flex-direction: column; gap: 28px;
+  font-size: var(--mt-fs-body-1);
+}
+
+/* Footer row, on every slide except the cover's page number. */
+.mt-slide__confidential,
+.mt-slide__copyright,
+.mt-slide__number {
+  position: absolute; top: 1010px; font-size: var(--mt-fs-footer); color: var(--mt-text);
+}
+.mt-slide__confidential { left: 75px; width: 240px; }
+.mt-slide__copyright { left: 338px; width: 220px; }
+.mt-slide__number { left: 1742px; width: 102px; text-align: right; font-weight: 300; }
+.mt-slide__source {
+  position: absolute; left: 590px; top: 1010px; width: 1100px;
+  font-size: var(--mt-fs-note); color: var(--mt-text);
+}
+
+/* Cover */
+.mt-slide__cover-title {
+  position: absolute; left: 76px; top: 394px; width: 1514px;
+  font: 500 var(--mt-fs-cover-title) / 1.15 var(--mt-font-head);
+}
+.mt-slide__logo--large { left: 75px; top: 707px; width: 398px; height: 61px; }
+.mt-slide__cover-subtitle {
+  position: absolute; left: 75px; top: 784px; width: 1046px;
+  font: 300 var(--mt-fs-subtitle-cover) / 1.15 var(--mt-font-body);
+}
+
+/* Section divider */
+.mt-slide__divider-number {
+  position: absolute; left: 127px; top: 494px; width: 170px;
+  font: 300 var(--mt-fs-divider-title) / 1.15 var(--mt-font-body);
+  color: var(--mt-title);
+}
+.mt-slide__divider-title {
+  position: absolute; left: 321px; top: 490px; width: 1205px;
+  font: 500 var(--mt-fs-divider-title) / 1.15 var(--mt-font-head);
+}
+
+/* ---------- Guideline components ---------- */
+
+/* Text box: #2a2a2a on Mindera Dark. Highlight one with a 1px accent line, never a yellow fill. */
+.mt-box {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 28px;
+  background: var(--mt-surface);
+  border-radius: 12px;
+}
+.mt-box--highlight { border: 1px solid var(--mt-accent); }
+.mt-box--outline { background: transparent; border: 1px solid var(--mt-border); }
+.mt-box h3 { font: 700 var(--mt-fs-body-1) / 1.15 var(--mt-font-head); }
+.mt-box--highlight h3 { color: var(--mt-accent-ink); }
+.mt-box p { font-size: var(--mt-fs-body-2); line-height: 1.15; }
+.mt-row { display: flex; gap: 24px; }
+.mt-row > * { flex: 1; }
+
+/* Lines: always 1px, in --mt-border, --mt-accent or --mt-text. */
+.mt-line { border: 0; border-top: 1px solid var(--mt-border); }
+
+/* Tables: 1px #595959 rules, #2a2a2a header row, highlighted row in the accent. */
+.mt-table {
+  border-collapse: collapse;
+  font-size: var(--mt-fs-body-1);
+  line-height: 1.15;
+  color: var(--mt-text);
+}
+.mt-table th, .mt-table td { border: 1px solid var(--mt-border); padding: 0.35em 0.6em; text-align: left; }
+.mt-table th { background: var(--mt-surface); font-weight: 700; }
+.mt-table .mt-num { text-align: right; }
+.mt-table .mt-row-highlight td { color: var(--mt-accent-ink); font-weight: 700; }
+
+/* Horizontal bar chart built from boxes, so the labels stay real Montserrat text when exported. */
+.mt-bars { display: flex; flex-direction: column; gap: 10px; font-size: var(--mt-fs-body-2); }
+.mt-bar { display: flex; align-items: center; gap: 16px; }
+.mt-bar__label { flex: none; width: 240px; text-align: right; }
+.mt-bar__fill { flex: none; height: 24px; border-radius: 4px; background: var(--mt-border); }
+.mt-bar--highlight .mt-bar__fill { background: var(--mt-accent); }
+.mt-bar__value { font-weight: 700; }
+
+/* ---------- Print / PDF: one slide per page at the slide's own size ---------- */
+
+@media print {
+  @page { size: 1920px 1080px; margin: 0; }
+  .mt-slide { break-after: page; }
+}

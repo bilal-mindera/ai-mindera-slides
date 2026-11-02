@@ -1,24 +1,21 @@
 /*
  * Mindera theme: brand tokens, fonts, glows and theme picker for any HTML/CSS/JS page.
  * Pair with mindera-theme.js (applies the saved theme and builds the picker).
- * Colours come from the Mindera Brandbook 2025 (pp. 32–53); see the mindera-themes skill.
+ * Colours come from the Mindera Brandbook 2025 (pp. 32–53) and, for Mindera Dark, the Mindera
+ * slide guidelines (text hierarchy, strokes and colours); see the mindera-themes skill.
  *
  * Token contract: every theme sets all of these on <html data-mindera-theme="…">.
- *   --mt-bg, --mt-surface, --mt-surface2, --mt-border   page, card, inset and line layers
+ *   --mt-bg, --mt-surface, --mt-surface2, --mt-border   page, card (text box), inset and line layers
  *   --mt-text, --mt-muted, --mt-muted2                   text, strongest to faintest
  *   --mt-accent      fills (buttons, active states, bars)
  *   --mt-on-accent   text on --mt-accent
  *   --mt-accent-ink  accent-coloured text/links (darker than --mt-accent on light themes)
  *   --mt-danger, --mt-success, --mt-warning, --mt-info   status text and icons
  *   --mt-glow-a, --mt-glow-b                             the brand "glows"
- * Shared by all themes: --mt-font-head, --mt-font-body, --mt-chart-1 … --mt-chart-6.
+ * Shared by all themes: --mt-font-head, --mt-font-body, --mt-title, --mt-chart-1 … --mt-chart-6.
  */
 
-@font-face {
-  font-family: 'PPNeueMachina';
-  src: url('fonts/PPNeueMachina-Regular.otf') format('opentype');
-  font-display: swap;
-}
+/* Montserrat is the only brand typeface: headings use it at Medium (500), body at Regular (400). */
 @font-face {
   font-family: 'Montserrat';
   src: url('fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
@@ -27,19 +24,21 @@
 }
 
 :root {
-  --mt-font-head: 'PPNeueMachina', 'Montserrat', system-ui, sans-serif;
+  --mt-font-head: 'Montserrat', system-ui, sans-serif;
   --mt-font-body: 'Montserrat', system-ui, sans-serif;
 }
 
 /* Themes. The selectors also work on any element, which is how the picker swatches preview a theme. */
+/* Mindera Dark follows the slide guidelines: white for all text on dark, #2a2a2a text boxes,
+   1px lines in #595959 (or #ffc700 / #ffffff), #ffc700 to highlight. */
 [data-mindera-theme="mindera-dark"], :root {
   --mt-bg: #0a0a0b;
-  --mt-surface: #18181a;
-  --mt-surface2: #232326;
-  --mt-border: #303033;
-  --mt-text: #f6f6f2;
-  --mt-muted: #9a9a91;
-  --mt-muted2: #66665f;
+  --mt-surface: #2a2a2a;
+  --mt-surface2: #373736;
+  --mt-border: #595959;
+  --mt-text: #ffffff;
+  --mt-muted: #d9d9d9;
+  --mt-muted2: #a6a6a6;
   --mt-accent: #ffc700;
   --mt-on-accent: #0a0a0b;
   --mt-accent-ink: #ffc700;
@@ -193,6 +192,11 @@
   --mt-chart-4: var(--mt-warning);
   --mt-chart-5: var(--mt-danger);
   --mt-chart-6: var(--mt-muted);
+  /* Slide and section titles. The template's pale yellow on Mindera Dark; accent ink elsewhere. */
+  --mt-title: var(--mt-accent-ink);
+}
+[data-mindera-theme="mindera-dark"], :root:not([data-mindera-theme]) {
+  --mt-title: #ffe68e;
 }
 
 /* ---------- Glows ---------- */

@@ -8,7 +8,7 @@ Each skill is a folder with a `SKILL.md`: YAML front matter (`name`, `descriptio
 
 | Skill | What it does |
 |---|---|
-| [`mindera-themes`](mindera-themes/SKILL.md) | Applies Mindera's brandbook themes to any web page or app: eight themes, brand fonts, glows, status and chart colours, and a theme picker. |
+| [`mindera-themes`](mindera-themes/SKILL.md) | Applies Mindera's brandbook themes to any web page, app or deck: eight themes, Montserrat, glows, status and chart colours, a theme picker, and the Mindera slide template's 16:9 layouts for PPTX and Google Slides. |
 | [`software-audit`](software-audit/SKILL.md) | Audits a macOS or Windows machine for outdated, unsupported or vulnerable software, grouped by category, and suggests update commands without running them. |
 
 ## Installing
